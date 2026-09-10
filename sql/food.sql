@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `deleted` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`

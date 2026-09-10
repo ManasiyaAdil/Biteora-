@@ -73,6 +73,8 @@ function campusbite_init_mysql($con) {
     if (!in_array('is_veg', $cols)) @$con->query("ALTER TABLE `items` ADD COLUMN `is_veg` TINYINT(1) NOT NULL DEFAULT 1 AFTER `is_available`;");
     if (!in_array('rating', $cols)) @$con->query("ALTER TABLE `items` ADD COLUMN `rating` DECIMAL(2,1) DEFAULT 4.5 AFTER `is_veg`;");
     if (!in_array('prep_time', $cols)) @$con->query("ALTER TABLE `items` ADD COLUMN `prep_time` VARCHAR(20) DEFAULT '10-15 mins' AFTER `rating`;");
+    @$con->query("ALTER TABLE `items` MODIFY `name` VARCHAR(255) NOT NULL;");
+    @$con->query("ALTER TABLE `items` MODIFY `price` DECIMAL(10,2) NOT NULL;");
 
     // 4. Orders Table with Razorpay, Token & Pickup Verification
     $con->query("CREATE TABLE IF NOT EXISTS `orders` (
