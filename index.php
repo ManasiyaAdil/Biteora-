@@ -124,7 +124,7 @@ include 'includes/header.php';
       <div style="position:relative;">
         <div class="card" style="padding:1.25rem; border-radius:24px; box-shadow:var(--shadow-lg); background:#FFFFFF;">
           <div style="position:relative; height:230px; border-radius:16px; overflow:hidden; margin-bottom:1.15rem;">
-            <img src="image.php?url=<?php echo urlencode('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'); ?>" alt="Campus Cafeteria" style="width:100%; height:100%; object-fit:cover;">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Campus Cafeteria" style="width:100%; height:100%; object-fit:cover;" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=75';">
             <div style="position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(25,25,25,0.7) 100%);"></div>
             <div style="position:absolute; bottom:12px; left:12px; display:flex; align-items:center; gap:0.5rem;">
               <span class="badge badge-success"><i class="fa-solid fa-circle" style="font-size:0.45rem;"></i> Cafeteria Open</span>
@@ -190,9 +190,12 @@ include 'includes/header.php';
         <?php foreach ($popular_items as $item): ?>
           <div class="food-card">
             <div class="food-img-wrap">
-              <img src="image.php?id=<?php echo $item['id']; ?>" 
+              <img src="<?php echo htmlspecialchars($item['image'] ?: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=75'); ?>" 
                    alt="<?php echo htmlspecialchars($item['name']); ?>" 
-                   loading="lazy">
+                   loading="lazy"
+                   decoding="async"
+                   referrerpolicy="no-referrer"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=75';">
               <div class="food-badge-rating">
                 <i class="fa-solid fa-star text-amber"></i> <?php echo number_format($item['rating'], 1); ?>
               </div>
@@ -212,7 +215,7 @@ include 'includes/header.php';
                 <div class="food-price">₹<?php echo number_format($item['price'], 2); ?></div>
 
                 <?php if ($item['is_available']): ?>
-                  <button type="button" class="btn btn-primary btn-sm" onclick="Biteora.addToCart(<?php echo $item['id']; ?>, '<?php echo addslashes($item['name']); ?>', <?php echo $item['price']; ?>, 'image.php?id=<?php echo $item['id']; ?>', <?php echo $item['is_veg']; ?>);">
+                  <button type="button" class="btn btn-primary btn-sm" onclick="Biteora.addToCart(<?php echo $item['id']; ?>, '<?php echo addslashes($item['name']); ?>', <?php echo $item['price']; ?>, '<?php echo addslashes($item['image'] ?: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=75'); ?>', <?php echo $item['is_veg']; ?>);">
                     <i class="fa-solid fa-plus"></i> ADD
                   </button>
                 <?php else: ?>

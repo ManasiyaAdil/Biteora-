@@ -465,6 +465,9 @@ function campusbite_seed_data($con) {
         }
     }
 
+    // Ensure every active item has a valid image URL (repair missing/null images)
+    @$con->query("UPDATE `items` SET `image` = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=75' WHERE (`image` IS NULL OR `image` = '') AND `deleted` = 0");
+
     // 3. Demo Users (Admin + Student)
     $admin_pass_hash = password_hash('toor', PASSWORD_DEFAULT);
     $con->query("INSERT INTO `users` (`id`, `role`, `name`, `username`, `password`, `email`, `address`, `contact`, `verified`, `deleted`)
