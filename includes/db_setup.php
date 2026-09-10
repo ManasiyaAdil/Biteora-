@@ -6,7 +6,7 @@ function campusbite_init_db($con, $pdo) {
     if ($initialized) return;
     $initialized = true;
 
-    if ($con) {
+    if ($con && !($con instanceof BiteoraSQLiteWrapper)) {
         campusbite_init_mysql($con);
     } elseif ($pdo) {
         campusbite_init_sqlite($pdo);
