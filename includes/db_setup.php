@@ -432,7 +432,8 @@ function campusbite_seed_data($con) {
         ]
     ];
 
-    $check_items = $con->query("SELECT COUNT(*) as cnt FROM `items` WHERE `description` IS NOT NULL AND `description` != ''");
+    @$con->query("UPDATE `items` SET `deleted` = 1 WHERE `name` LIKE 'Item %'");
+    $check_items = $con->query("SELECT COUNT(*) as cnt FROM `items` WHERE `deleted` = 0 AND `description` IS NOT NULL AND `description` != ''");
     $cnt = $check_items ? (int)$check_items->fetch_assoc()['cnt'] : 0;
     
     if ($cnt < 50 && file_exists(__DIR__ . '/../seed_100_items.php')) {

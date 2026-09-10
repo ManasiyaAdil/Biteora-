@@ -216,4 +216,21 @@ window.CampusBite = Biteora;
 document.addEventListener('DOMContentLoaded', () => {
   Biteora.updateCartBadge();
   Biteora.renderCartUI();
+
+  // Universal food image fallback recovery
+  const fallbacks = [
+    'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+    'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%23FFF0EB"/><circle cx="300" cy="180" r="50" fill="%23FFD8CC"/><text x="300" y="270" font-family="sans-serif" font-size="20" font-weight="bold" fill="%23FF5A36" text-anchor="middle">Biteora Fresh Dish</text></svg>'
+  ];
+
+  document.querySelectorAll('.food-img-wrap img, .menu-card img').forEach(img => {
+    img.addEventListener('error', function() {
+      const step = parseInt(this.dataset.errStep || '0', 10);
+      if (step < fallbacks.length) {
+        this.dataset.errStep = step + 1;
+        this.src = fallbacks[step];
+      }
+    });
+  });
 });
