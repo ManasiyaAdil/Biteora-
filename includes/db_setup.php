@@ -434,7 +434,13 @@ function campusbite_seed_data($con) {
     $cnt = $check_items ? $check_items->fetch_assoc()['cnt'] : 0;
     
     if ($cnt < 6) {
-        $con->query("DELETE FROM `items` WHERE `name` LIKE 'Item %' OR `description` IS NULL OR `description` = ''");
+        try {
+            @$con->query("SET FOREIGN_KEY_CHECKS = 0;");
+            @$con->query("DELETE FROM `items` WHERE `name` LIKE 'Item %' OR `description` IS NULL OR `description` = ''");
+            @$con->query("SET FOREIGN_KEY_CHECKS = 1;");
+        } catch (Throwable $e) {
+            // Ignore if foreign keys or permissions restrict deletion
+        }
         
         foreach ($items as $it) {
             $c_id = $cat_map[$it['slug']] ?? 1;
