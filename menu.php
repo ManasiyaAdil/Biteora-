@@ -144,11 +144,9 @@ include 'includes/header.php';
       <?php foreach ($items as $item): ?>
         <div class="food-card" data-item-id="<?php echo $item['id']; ?>" data-is-veg="<?php echo $item['is_veg']; ?>">
           <div class="food-img-wrap">
-            <img src="<?php echo htmlspecialchars($item['image'] ?: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'); ?>" 
+            <img src="image.php?id=<?php echo $item['id']; ?>" 
                  alt="<?php echo htmlspecialchars($item['name']); ?>" 
-                 loading="lazy"
-                 referrerpolicy="no-referrer"
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';">
+                 loading="lazy">
             
             <!-- Veg / Non-Veg badge -->
             <div class="food-diet-badge <?php echo $item['is_veg'] ? 'veg' : 'nonveg'; ?>">
@@ -198,7 +196,7 @@ include 'includes/header.php';
               <?php if ($item['is_available']): ?>
                 <button type="button" 
                         class="btn btn-primary btn-sm add-cart-btn" 
-                        onclick="Biteora.addToCart(<?php echo $item['id']; ?>, '<?php echo addslashes($item['name']); ?>', <?php echo $item['price']; ?>, '<?php echo addslashes($item['image']); ?>', <?php echo $item['is_veg']; ?>);"
+                        onclick="Biteora.addToCart(<?php echo $item['id']; ?>, '<?php echo addslashes($item['name']); ?>', <?php echo $item['price']; ?>, 'image.php?id=<?php echo $item['id']; ?>', <?php echo $item['is_veg']; ?>);"
                         style="padding:0.55rem 1.15rem; font-weight:700; border-radius:999px; letter-spacing:0.3px; display:inline-flex; align-items:center; gap:0.4rem;">
                   <i class="fa-solid fa-cart-plus"></i> ADD TO CART
                 </button>
