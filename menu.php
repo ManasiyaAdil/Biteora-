@@ -147,7 +147,8 @@ include 'includes/header.php';
             <img src="<?php echo htmlspecialchars($item['image'] ?: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80'); ?>" 
                  alt="<?php echo htmlspecialchars($item['name']); ?>" 
                  loading="lazy"
-                 onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';">
+                 referrerpolicy="no-referrer"
+                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';">
             
             <!-- Veg / Non-Veg badge -->
             <div class="food-diet-badge <?php echo $item['is_veg'] ? 'veg' : 'nonveg'; ?>">

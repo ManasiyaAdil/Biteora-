@@ -20,6 +20,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="referrer" content="no-referrer">
   <title><?php echo isset($page_title) ? $page_title . ' | Biteora' : 'Biteora - Smart Campus Dining | Skip the Queue. Eat Smarter.'; ?></title>
   
   <!-- Favicon -->

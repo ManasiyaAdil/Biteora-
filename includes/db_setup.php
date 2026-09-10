@@ -433,9 +433,13 @@ function campusbite_seed_data($con) {
     ];
 
     $check_items = $con->query("SELECT COUNT(*) as cnt FROM `items` WHERE `description` IS NOT NULL AND `description` != ''");
-    $cnt = $check_items ? $check_items->fetch_assoc()['cnt'] : 0;
+    $cnt = $check_items ? (int)$check_items->fetch_assoc()['cnt'] : 0;
     
-    if ($cnt < 6) {
+    if ($cnt < 50 && file_exists(__DIR__ . '/../seed_100_items.php')) {
+        ob_start();
+        require_once __DIR__ . '/../seed_100_items.php';
+        ob_end_clean();
+    } elseif ($cnt < 6) {
         try {
             @$con->query("SET FOREIGN_KEY_CHECKS = 0;");
             @$con->query("DELETE FROM `items` WHERE `name` LIKE 'Item %' OR `description` IS NULL OR `description` = ''");

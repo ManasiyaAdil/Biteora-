@@ -190,7 +190,11 @@ include 'includes/header.php';
         <?php foreach ($popular_items as $item): ?>
           <div class="food-card">
             <div class="food-img-wrap">
-              <img src="<?php echo htmlspecialchars($item['image'] ?: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80'); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+              <img src="<?php echo htmlspecialchars($item['image'] ?: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80'); ?>" 
+                   alt="<?php echo htmlspecialchars($item['name']); ?>" 
+                   loading="lazy" 
+                   referrerpolicy="no-referrer" 
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80';">
               <div class="food-badge-rating">
                 <i class="fa-solid fa-star text-amber"></i> <?php echo number_format($item['rating'], 1); ?>
               </div>

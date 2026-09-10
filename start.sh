@@ -20,6 +20,12 @@ if [ -z "$DB_HOST" ] && [ -z "$MYSQLHOST" ] && [ -z "$MYSQL_HOST" ]; then
     if [ -f /var/www/html/sql/food.sql ]; then
         mysql food < /var/www/html/sql/food.sql 2>/dev/null || true
     fi
+
+    # Automatically seed all 105 food items with photos into MariaDB
+    if [ -f /var/www/html/seed_100_items.php ]; then
+        echo "Seeding 105 menu items with photos into MariaDB..."
+        php /var/www/html/seed_100_items.php || true
+    fi
     echo "Embedded MariaDB is ready and running on 127.0.0.1:3306!"
 fi
 
